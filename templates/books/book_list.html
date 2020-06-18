@@ -1,0 +1,15 @@
+{% extends '_base.html' %}
+{% block title %}Books{% endblock title %}
+{% block content %}
+    {% if not perms.books.special_status %}
+        <a href="{% url 'orders' %}" class="btn btn-success" >Purchase All Books</a>
+    {% endif %}
+    <form class="form-inline mt-2 mt-md-0" action="{% url 'search_results' %}" method="get">
+        <input name="q" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+    </form>
+    {% for book in book_list %}
+    <div>
+        <h2><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></h2>
+    </div>
+    {% endfor %}
+{% endblock content %}
